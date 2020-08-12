@@ -14,25 +14,30 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
 
-namespace WpfApplication2 { 
+namespace WpfApplication2 {
     /// <summary>
     /// Interaction logic for Quiz.xaml
     /// </summary>
-    public partial class Quiz : Window { 
+    public partial class Quiz : Window {
         public static int intQuest = 0;
         public static int intTime = 600;
         public static int timerTickCount = 0;
         private bool quizStart = false;
         private static DispatcherTimer timer;
+        private static string DBName = "Countries.db";
+        private static string CountryTableName = "AfricanCountries";
 
-        public void Timer() { 
+        public QuesAnsw questAnsw { get; set; }
+        public Random rnd { get; set; }
+
+        public void Timer() {
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1); // will 'tick' once every second
             timer.Tick += new EventHandler(Timer_Tick);
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e) { 
+        private void Timer_Tick(object sender, EventArgs e) {
             DispatcherTimer timer = (DispatcherTimer)sender;
             TimeSpan ts = TimeSpan.FromSeconds(TimeLeft());
 
@@ -41,36 +46,49 @@ namespace WpfApplication2 {
             CommandManager.InvalidateRequerySuggested();
 
             timerTickCount++;
-            if (intTime - timerTickCount < 0) { 
+            if (intTime - timerTickCount < 0) {
                 timer.Stop();
                 endquiz();
             }
         }
 
-        public static int TimeLeft() { 
+        public static int TimeLeft() {
             int intTimeLeft = intTime - timerTickCount;
             return intTimeLeft;
         }
 
-        public Quiz() { 
+        public Quiz() {
             InitializeComponent();
+            InitRandomGenerator();
+            InitializeQuestionsDB();
         }
 
-        private void EnableRad() { 
+        private void InitRandomGenerator()
+        {
+            rnd = new Random();
+        }
+
+        private void InitializeQuestionsDB()
+        {
+            questAnsw = new QuesAnsw();
+            questAnsw.GetCountries(DBName, CountryTableName);
+        }
+
+        private void EnableRad() {
             rad1.IsEnabled = true;
             rad2.IsEnabled = true;
             rad3.IsEnabled = true;
             rad4.IsEnabled = true;
         }
 
-        private void DisableRad() { 
+        private void DisableRad() {
             rad1.IsEnabled = false;
             rad2.IsEnabled = false;
             rad3.IsEnabled = false;
             rad4.IsEnabled = false;
         }
 
-        private void ResetRadSelection() { 
+        private void ResetRadSelection() {
             rad1.IsChecked = false;
             rad2.IsChecked = false;
             rad3.IsChecked = false;
@@ -82,12 +100,13 @@ namespace WpfApplication2 {
             rad4.Foreground = Brushes.White;
         }
 
-        private void CurrentQuestion() { 
-            string strQuestion;
+        private void CurrentQuestion() {
+            string strQuestion = "What is the capital of ";
 
             //Grabs current question from array in QuesAnsw and updates question text block
-            strQuestion = QuesAnsw.strQuestions[intQuest, 0];
-            tbQuestion.Text = strQuestion;
+            //strQuestion = QuesAnsw.strQuestions[intQuest, 0];
+            string country = questAnsw.Countries[intQuest].CountryName;
+            tbQuestion.Text = strQuestion + country;
 
             //update radio buttons
             CurrentOptions();
@@ -97,26 +116,48 @@ namespace WpfApplication2 {
             lblQuestionNum.Content = String.Format("Question {0}/{1}", intQuest, QuesAnsw.strQuestions.GetUpperBound(0) + 1); ;
         }
 
-        private void StoreAnswer() { 
-            if (rad1.IsChecked == true) { 
-                QuesAnsw.strQuestions[intQuest - 1, 6] = "1";
+        private void StoreAnswer()
+        {
+            //what happens here
+
+            //if (rad1.IsChecked == true) {
+            //    QuesAnsw.strQuestions[intQuest - 1, 6] = "1";
+            //}
+            //else if (rad2.IsChecked == true) {
+            //    QuesAnsw.strQuestions[intQuest - 1, 6] = "2";
+            //}
+            //else if (rad3.IsChecked == true) {
+            //    QuesAnsw.strQuestions[intQuest - 1, 6] = "3";
+            //}
+            //else if (rad4.IsChecked == true) {
+            //    QuesAnsw.strQuestions[intQuest - 1, 6] = "4";
+            //}
+        }
+        private int GenerateRandomAnswerOptions()
+        {
+           
+           var number= rnd.Next(0, questAnsw.Countries.Count - 1);
+            if (number!=intQuest)
+            {
+                return number;
             }
-            else if (rad2.IsChecked == true) { 
-                QuesAnsw.strQuestions[intQuest - 1, 6] = "2";
-            }
-            else if (rad3.IsChecked == true) { 
-                QuesAnsw.strQuestions[intQuest - 1, 6] = "3";
-            }
-            else if (rad4.IsChecked == true) { 
-                QuesAnsw.strQuestions[intQuest - 1, 6] = "4";
+            else
+            {
+               return GenerateRandomAnswerOptions();
             }
         }
+        private void CurrentOptions() {
 
-        private void CurrentOptions() { 
-            rad1.Content = QuesAnsw.strQuestions[intQuest, 1];
-            rad2.Content = QuesAnsw.strQuestions[intQuest, 2];
-            rad3.Content = QuesAnsw.strQuestions[intQuest, 3];
-            rad4.Content = QuesAnsw.strQuestions[intQuest, 4];
+            rad1.Content = questAnsw.Countries[intQuest].Capital;
+            rad2.Content = questAnsw.Countries[GenerateRandomAnswerOptions()].Capital;
+            rad3.Content = questAnsw.Countries[GenerateRandomAnswerOptions()].Capital;
+            rad4.Content = questAnsw.Countries[GenerateRandomAnswerOptions()].Capital;
+
+
+            //rad1.Content = QuesAnsw.strQuestions[intQuest, 1];
+            //rad2.Content = QuesAnsw.strQuestions[intQuest, 2];
+            //rad3.Content = QuesAnsw.strQuestions[intQuest, 3];
+            //rad4.Content = QuesAnsw.strQuestions[intQuest, 4];
         }
 
         private void btnAnswer_Click(object sender, RoutedEventArgs e) { 

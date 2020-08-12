@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-
+using WpfApplication2.Model;
 
 namespace WpfApplication2 { 
     public class QuesAnsw { 
@@ -25,8 +26,39 @@ namespace WpfApplication2 {
                                        {"What is the capital of The Republic of Cabo Verde?", "Algiers", "Malabo", "Bujumbura", "Praia", "4", String.Empty},
                                        {"What is the capital of The Central African Republic?", "Tripoli", "Bamako", "Bangui", "Lilongwe", "3", String.Empty},
                                        {"What is the capital of Chad?", "N'Djamena", "Conakry", "Accra", "Asmara", "1", String.Empty}};
-                                      
-                                       
+
+        public List<Country> Countries { get; set; }
+
+        public void GetCountries(string Connection, string TableName)
+        {
+            string Query = string.Format("SELECT * FROM {0}", TableName);
+
+            using (SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0}", Connection)))
+            {
+                connection.Open();
+                using (SQLiteCommand command = new SQLiteCommand(Query, connection))
+                {
+                    Countries = new List<Country>();
+
+                    using (SQLiteDataReader myReader = command.ExecuteReader())
+                    {
+
+                        while (myReader.Read())
+                        {
+                            Country country = new Country()
+                            {
+                                CountryName = Convert.ToString(myReader["Country"]),
+                                Capital = Convert.ToString(myReader["Capital"])
+
+                            };
+                            Countries.Add(country);
+
+                        }
+                    }
+                }
+                connection.Close();
+            }
+        }
 
 
         public static int TestScore() { 

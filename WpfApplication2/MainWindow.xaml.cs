@@ -68,7 +68,7 @@ namespace WpfApplication2
             }
             else
             {
-                btnResume.IsEnabled = true;`
+                btnResume.IsEnabled = true;
             }
         }
 

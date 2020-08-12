@@ -1,55 +1,56 @@
-Algeria, Algiers
-Angola, Luanda
-Benin, Porto-Novo
-Botswana, Gaborone
-Burkina Faso, Ouagadougou
-Burundi, Bujumbura
-Cameroon, Yaounde
-The Republic of Cabo Verde, Praia
-The Central African Republic, Bangui
-Chad, N'Djamena
-Comoros, Moroni
-Democratic Republic of Congo, Kinshasa
-Republic of Congo, Brazzaville
-Cote d'Ivoire, Yamoussoukro
-Djibouti, Djibouti
-Egypt, Cairo
-Equatorial Guinea, Malabo
-Eritrea, Asmara
-Ethiopia, Addis Ababa
-Gabon, Libreville
-Gambia, Banjul
-Ghana, Accra
-Guinea, Conakry
-Guinea-Bissau, Bissau
-Kenya, Nairobi
-Lesotho, Maseru
-Liberia, Monrovia
-Libya, Tripoli
-Madagascar, Antananarivo
-Malawi, Lilongwe
-Mali, Bamako
-Mauritania, Nouakchott
-Mauritius, Port Louis
-Morocco, Rabat
-Mozambique, Maputo
-Namibia, Windhoek
-Niger, Niamey
-Nigeria, Abuja
-Rwanda, Kigali
-Republic Arab Saharawi Democratic, Aauin
-Sao Tome and Principe, Sao Tome
-Senegal, Dakar
-Seychelles, Victoria
-Sierra Leone, Freetown
-Somalia, Mogadishu
-South Africa, Pretoria * Bloemfontein * CapeTown
-South Sudan, Juba
-Sudan, Khartoum
-Swaziland, Lobamba * Mbabane
-Tanzania, Dar es Salaam * Dodoma
-Togo, Lome
-Tunisia, Tunis
-Uganda, Kampala
-Zambia, Lusaka
-Zimbabwe, Harare
+Id,Country,Capital
+1,Algeria, Algiers
+2,Angola, Luanda
+3,Benin, Porto-Novo
+4,Botswana, Gaborone
+5,Burkina Faso, Ouagadougou
+6,Burundi, Bujumbura
+7,Cameroon, Yaounde
+8,The Republic of Cabo Verde, Praia
+9,The Central African Republic, Bangui
+10,Chad, N'Djamena
+11,Comoros, Moroni
+12,Democratic Republic of Congo, Kinshasa
+13,Republic of Congo, Brazzaville
+14,Cote d'Ivoire, Yamoussoukro
+15,Djibouti, Djibouti
+16,Egypt, Cairo
+17,Equatorial Guinea, Malabo
+18,Eritrea, Asmara
+19,Ethiopia, Addis Ababa
+20,Gabon, Libreville
+21,Gambia, Banjul
+22,Ghana, Accra
+23,Guinea, Conakry
+24,Guinea-Bissau, Bissau
+25,Kenya, Nairobi
+26,Lesotho, Maseru
+27,Liberia, Monrovia
+28,Libya, Tripoli
+29,Madagascar, Antananarivo
+30,Malawi, Lilongwe
+31,Mali, Bamako
+32,Mauritania, Nouakchott
+33,Mauritius, Port Louis
+34,Morocco, Rabat
+35,Mozambique, Maputo
+36,Namibia, Windhoek
+37,Niger, Niamey
+38,Nigeria, Abuja
+39,Rwanda, Kigali
+40,Republic Arab Saharawi Democratic, Aauin
+41,Sao Tome and Principe, Sao Tome
+42,Senegal, Dakar
+43,Seychelles, Victoria
+44,Sierra Leone, Freetown
+45,Somalia, Mogadishu
+46,South Africa, Pretoria * Bloemfontein * CapeTown
+47,South Sudan, Juba
+48,Sudan, Khartoum
+49,Swaziland, Lobamba * Mbabane
+50,Tanzania, Dar es Salaam * Dodoma
+51,Togo, Lome
+52,Tunisia, Tunis
+53,Uganda, Kampala
+54,Zambia, Lusaka
+55,Zimbabwe, Harare
